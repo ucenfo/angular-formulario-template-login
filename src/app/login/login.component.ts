@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { FormGroup, NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -8,15 +8,20 @@ import { NgForm } from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
   @ViewChild('f', { static: false }) registrar!: NgForm;
-  nicknameExiste = true;
+  nicknameExiste = false;
   provincias: string [] = ['Cartago', 'San José', 'Heredia'];
   defaultProvincia = "Cartago";
   apodo = '';
   contrasenia = '';
   generos: string [] = ['masculino', 'femenino'];
 
-
-
+  changeStatusNickName() {
+    this.nicknameExiste = !this.nicknameExiste;
+  }
+  fieldTextType = false;
+  toggleFielType() {
+    this.fieldTextType = !this.fieldTextType;
+  }
 
 
   

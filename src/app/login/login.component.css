@@ -39,3 +39,32 @@ div label input {
 small {
     color: red;
 }
+.radio-button {
+    display: flex;
+    background-color: aquamarine;
+    height: 2.5rem;
+}
+/* div>label {
+    height: 3rem;
+} */
+/* #no-line {
+    border: none;
+} */
+.prueba {
+    width: 20%;
+    height: auto;
+    margin-left: 20%;
+}
+/* .prueba.div {
+    width: 20%;
+} */
+body{
+    padding:100px 0;
+    background-color:#efefef
+  }
+  a, a:hover{
+    color:#333
+  }
+  .fa .fa-eye-slash {
+      width: 50px;
+  }
