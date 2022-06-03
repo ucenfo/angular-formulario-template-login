@@ -1,0 +1,27 @@
+form {
+    padding: 5px 8px;
+    margin: 10px 15px;
+}
+.row {
+    display: flex;
+    box-sizing: border-box;
+}
+.form-group {
+    margin: 0 15px;
+    box-sizing: border-box;
+}
+.row-1 {
+    width: 25%;
+    box-sizing: border-box;
+}
+label, input, small {
+    width: 100%;
+    height: 2.5rem;
+    margin: 5px 0;
+    box-sizing: border-box;
+}
+div label input {
+    
+    height: 1.5rem;
+    margin: auto;
+  }
