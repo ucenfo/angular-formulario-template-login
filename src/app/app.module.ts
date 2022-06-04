@@ -7,17 +7,23 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ShowHidePasswordModule } from 'ngx-show-hide-password';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ShortenPipe } from './pipes/shorten.pipe';
+import { FormatPhonePipe } from './pipes/format-phone.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    ShortenPipe,
+    FormatPhonePipe
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     NgbModule,
+    FontAwesomeModule,
     ShowHidePasswordModule
   ],
   providers: [],

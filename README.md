@@ -1,28 +1,60 @@
 # ComponentesVarios
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.1.0.
+El objetivo de este proyecto es crear componentes que sirvan de templates o ejemplos en proyectos utilizando [Angular CLI](https://github.com/angular/angular-cli) version 12.1.0.
 
-## Development server
+## Dependencias utilizadas
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+A parte de las dependencias que se incluyen de forma automática al hacer la instalación mediante la línea de comando
 
-## Code scaffolding
+```
+    ng new <nombre proyecto>
+```
+En el cual se puede instalar el `router`
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Adicionalmente se instaló en este proyecto:
 
-## Build
+1. Bootstrap, ver [npmjs.com](https://www.npmjs.com/package/bootstrap). En este caso se instaló de forma local agregando `--save`
+```
+    npm install --save bootstrap
+```
+2. jQuery, ver [npmjs.com](https://www.npmjs.com/package/jquery) y [api.jquery.com](https://api.jquery.com/) También se instaló de forma local.
+```
+    npm install --save jquery
+```
+3. ng-bootstrap, que incluye widged de bootstrap, ver [npmjs.com](https://www.npmjs.com/package/@ng-bootstrap/ng-bootstrap), y [ng-bootstrap.github.io](https://ng-bootstrap.github.io/#/home)
+```
+    ng add @ng-bootstrap/ng-bootstrap
+```
+4. ngx-show-hide-password, permite manipular el texto incluido en un `input` de tipo `password`, de forma que se puede ver u ocultar. Ver [npmjs.com](https://www.npmjs.com/package/ngx-show-hide-password)
+```
+    npm install ngx-show-hide-password --save
+```
+5. @fortawesome/angular-fontawesome, ver [npmjs.com](https://www.npmjs.com/package/@fortawesome/angular-fontawesome), este da acceso a la librería de imágenes de [FOrtAwesome/Font-Avesome](https://github.com/FortAwesome/Font-Awesome/tree/master/js-packages/%40fortawesome/free-solid-svg-icons).
+```
+    npm i @fortawesome/angular-fontawesome
+    npm install @fortawesome/fontawesome-svg-core
+    npm install @fortawesome/free-solid-svg-icons
+```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Una vez instalados los dos puntos anteriores, se puede aplicar como componente, ver [stackblitz.com](https://stackblitz.com/edit/angular-okrmdi?embed=1&file=src/app/app.component.html), y [snyk.io](https://snyk.io/advisor/npm-package/ngx-show-hide-password)
+```
+    <show-hide-password size="lg" [btnOutline]="false">
+        <input type="password" name="..." >
+    </show-hide-password>
+```
 
-## Running unit tests
+## Validaciones
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Para verificar el patrón en la creación de la clave se usaron los siguientes:
+```
+    [pattern]="'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$'"
+    [pattern]="'(\\S*$)'"
+```
+La primera parte establece que sea al menos de 8 caracteres, que al menos uno letra sea mayúscula, una minúscula, un número y un caracter especial de los ahí incluidos.
 
-## Running end-to-end tests
+El segundo permite comprobar que no existe espacios en blanco.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## Componentes desarrollados
 
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
-# componentes-varios
+1. creación de usuario (login), que incluye una template de los elementos básicos que se pueden utilizar en la creación de una cuenta. Este se utiliza formularios de Angular
+2. Pipes, que nos permiten transformar elementos.

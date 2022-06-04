@@ -1,18 +1,31 @@
 form {
     padding: 5px 8px;
-    margin: 10px 5%;
+    margin: 10px 15%;
 }
 .row {
     display: flex;
     box-sizing: border-box;
 }
-.form-group {
-    margin: 0 15px;
+/* .form-group {
+    margin: 0 7.5% 0 0;
     box-sizing: border-box;
-}
+} */
+
 .row-1 {
     width: 30%;
-    height: 7rem;
+    height: 8rem;
+    box-sizing: border-box;
+}
+.col-1 {
+    margin-right: 2.5%;
+    box-sizing: border-box;
+}
+.col-2 {
+    margin: 0 2.5%;
+    box-sizing: border-box;
+}
+.col-3 {
+    margin-left: 2.5%;
     box-sizing: border-box;
 }
 label {
@@ -58,13 +71,19 @@ small {
 /* .prueba.div {
     width: 20%;
 } */
-body{
+/* body{
     padding:100px 0;
     background-color:#efefef
-  }
-  a, a:hover{
-    color:#333
-  }
-  .fa .fa-eye-slash {
+  } */
+  /* a, a:hover{
+    color:rgb(239, 12, 12)
+  } */
+  /* .fa .fa-eye-slash {
       width: 50px;
   }
+  */
+  .col-pass {
+    margin: 0 10%;
+    box-sizing: border-box;
+  }
+
