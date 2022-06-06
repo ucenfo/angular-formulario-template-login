@@ -160,7 +160,19 @@
                 </select>
                 <small *ngIf="!distrito.valid && distrito.touched">Debe escoger un distrito</small>
             </div>
-            
+        </div>
+        <div class="row-0">
+            <label for="nickname">Dirección exacta</label> <br>
+                <input 
+                type="text" 
+                id="address" 
+                placeholder="Direccíon exacta" 
+                required
+                maxlength="140"
+                ngModel
+                name="address"
+                #address="ngModel"> <br>
+                <small *ngIf="!address.valid && address.touched">Debe agregar la dirección exacta</small>
         </div>
     </div>
     <div class="row">
