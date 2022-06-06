@@ -1,21 +1,24 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, NgForm } from '@angular/forms';
-import { faAd, faCandyCane, faCloudShowersHeavy, faEnvelopeOpenText, faGifts } from '@fortawesome/free-solid-svg-icons';
-import { ShowHideService } from 'ngx-show-hide-password';
-import { untilDestroyed } from "ngx-take-until-destroy";
+
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit, OnDestroy{
+export class LoginComponent implements OnInit{
   @ViewChild('f', { static: false }) registrar!: NgForm;
   nicknameExiste = false;
   provincias: string [] = ['Cartago', 'San José', 'Heredia', 'Alajuela'];
-  defaultProvincia = "Cartago";
+  cantones: string [] = ['Oreamuno', 'Paraíso'];
+  distritos: string [] = ['San Rafael', 'Cot'];
+  defaultProvincia = "";
+  defaultCanton = "";
+  defaultDistrito = "";
   apodo = '';
   contrasenia = '';
+  contrasenia2 = '';
   tel = '';
   generos: string [] = ['masculino', 'femenino'];
 
@@ -23,39 +26,18 @@ export class LoginComponent implements OnInit, OnDestroy{
     this.nicknameExiste = !this.nicknameExiste;
   }
 
-  // Opcion 2
-  faCandyCane = faCandyCane;
-  faGifts = faGifts;
-  faAd = faAd
-  faCloudShowersHeavy = faCloudShowersHeavy
-  faEnvelopeOpenText = faEnvelopeOpenText
-  isHidden = true;
-
-
- 
-
-
-  
-
-  
-
-  // nombre = this.registrar.value.username;
-  // apellido1 = this.registrar.value.apellido1;
-  // apellido2 = this.registrar.value.apellido2;
-  // nickname = this.registrar.value.nickname;
-  // correo = this.registrar.value.email;
-
-
+  cargarCanton(provincia: any) {
+    this.defaultCanton = '';
+    console.log(provincia.value);
+    // TODO: consulta a la BD para traer los cantones de la provincia elegida.
+}
+cargarDistrito(canton: any) {
+  this.defaultDistrito = '';
+  console.log(canton.value);
+}
 
   // @ViewChild('f', {static: false}) registrare: NgForm;
-  constructor(private service: ShowHideService) { 
-    this.service
-    .getObservable("password1")
-    .pipe(untilDestroyed(this))
-    .subscribe(show => {
-      this.isHidden = !show;
-    })
-  }
+
 
   ngOnInit(): void {
   }
@@ -74,8 +56,5 @@ export class LoginComponent implements OnInit, OnDestroy{
     console.log(nombre);
     console.log(this.registrar.controls.apellido1.status);
     console.log(this.registrar.controls.apellido1.touched);
-  }
-  ngOnDestroy(): void {
-      
   }
 }

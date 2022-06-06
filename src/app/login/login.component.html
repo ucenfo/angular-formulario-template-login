@@ -82,8 +82,8 @@
                 <small *ngIf="!phone.valid && phone.touched">Debe ingresar 8 dígitos</small>
             </div>
         </div>
-        <div class="row">
-            <div class="form-group row-1 col-pass">
+        <div class="row ">
+            <div class="form-group row-pass col-pass">
                 <label for="password">Contraseña</label> <br>
                 <show-hide-password size="lg" [btnOutline]="false" >
                 <input 
@@ -96,10 +96,9 @@
                 [(ngModel)]="contrasenia"
                 name="password"
                 #password="ngModel">
-            </show-hide-password>
-                <small *ngIf="!password.valid && password.touched">Mínimo: 8 caracteres, una letra minúscula, una mayúscula, un número, y un caracter especial</small> <br>
-            </div>
-            <div class="form-group row-1 col-pass">
+            </show-hide-password>              
+            </div>   
+            <div class="form-group row-pass col-pass">
                 <label for="password">Repetir contraseña</label> <br>
                 <show-hide-password size="lg" [btnOutline]="false" >
                 <input 
@@ -109,47 +108,78 @@
                 minlength="8"
                 [pattern]="'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$'"
                 [pattern]="'(\\S*$)'"
-                [(ngModel)]="contrasenia"
+                [(ngModel)]="contrasenia2"
                 name="password2"
                 #password2="ngModel">
-            </show-hide-password>
-                
+                </show-hide-password>  
             </div>
         </div>
-        <small *ngIf="!password2.valid && password2.touched">Mínimo: 8 caracteres, una letra minúscula, una mayúscula, un número, y un caracter especial</small> <br>
+        <small *ngIf="!password.valid && password.touched">La contraseña de debe tener un mínimo de 8 caracteres, al menos una letra minúscula, una letra mayúscula, un número, y un caracter especial</small>
+        <small *ngIf="password.valid && contrasenia !== contrasenia2 && password2.touched">La contraseñas no coinciden</small> <br>
     </div>
-
-    
     <div id="user-comunication" ngModelGroup="userComunication">
         <div class="row">
-            <div class="form-group row-1">
+            <div class="form-group col-1 row-1">
                 <label for="provincia">Provincia</label> <br>
                 <select class="form-select"
-                name="provincia" 
+                name="provincia"
+                required
                 id="provincia"
-                [ngModel]="defaultProvincia" 
-                name="provincia">
-                    <option *ngFor="let provincia of provincias" >{{ provincia }}</option>
+                [(ngModel)]="defaultProvincia" 
+                name="provincia"
+                #provincia="ngModel"
+                (change)="cargarCanton($event.target)">
+                    <option *ngFor="let provincia of provincias">{{ provincia }}</option>
                 </select>
+                <small *ngIf="!provincia.valid && provincia.touched">Debe escoger una provincia</small>
             </div>
-            <div class="form-group radio row-1" >
-                <div class="radio-button" *ngFor="let genero of generos">
-                    {{ genero }}
-                <label >
-                    <input
-                    type="radio"
-                    name="genero"
-                    ngModel
-                    [value]="genero"
-                    required
-                    #genero="ngModel"> 
-                </label>
-                </div>
-                <small >Debe agregar el teléfono</small> <br>
+            <div class="form-group col-2 row-1" [ngClass]="{hide: defaultProvincia === ''}">
+                <label for="canton">Cantón</label> <br>
+                <select class="form-select"
+                name="canton"
+                required
+                id="canton"
+                [(ngModel)]="defaultCanton" 
+                name="canton"
+                #canton="ngModel"
+                (change)="cargarDistrito($event.target)">
+                    <option *ngFor="let canton of cantones">{{ canton }}</option>
+                </select>
+                <small *ngIf="!canton.valid && canton.touched">Debe escoger un cantón</small>
+            </div>    
+            <div class="form-group col-3 row-1" [ngClass]="{hide: defaultCanton === ''}">
+                <label for="canton">Cantón</label> <br>
+                <select class="form-select"
+                name="distrito"
+                required
+                id="distrito"
+                [(ngModel)]="defaultDistrito" 
+                name="distrito"
+                #distrito="ngModel">
+                    <option *ngFor="let distrito of distritos">{{ distrito }}</option>
+                </select>
+                <small *ngIf="!distrito.valid && distrito.touched">Debe escoger un distrito</small>
             </div>
+            
         </div>
     </div>
-    
+    <div class="row">
+        <div class="form-group radio row-1" >
+            <div class="radio-button" *ngFor="let genero of generos">
+                {{ genero }}
+            <label >
+                <input
+                type="radio"
+                name="genero"
+                ngModel
+                [value]="genero"
+                required
+                #genero="ngModel"> 
+            </label>
+            </div>
+            <small >Debe agregar el teléfono</small> <br>
+        </div>
+    </div>
     <button 
     class="btn btn-primary" 
     type="submit"
@@ -164,19 +194,7 @@
         <p>El estado es: {{ nicknameExiste }}</p>
   </div>
   
-  <div class="container-fluid">
-	<div class="input-group my-3">
-		<input class="form-control" id="password1" type="password" placeholder="Password" showHideInput>
-		<div class="input-group-append">
-			<button class="btn border border-primary" [ngClass]="{'btn-danger': isHidden, 'btn-success': !isHidden}" type="button" showHideTrigger="password1">
-        <fa-icon [ngClass]="{'text-success': isHidden, 'text-danger': !isHidden}" [fixedWidth]="true" size="lg" [icon]="(isHidden ? faCloudShowersHeavy : faCandyCane)"
-          [showHideStatus]="{id: 'password1'}"></fa-icon>
-      </button>
-		</div>
-	</div>
-</div>
-<p>{{ apodo | shorten }}</p>
-<p>{{ tel | formatPhone:4 }}</p>
+
 <!-- [pattern]="'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$'" 
 -->
 <!-- /^\S*$/  no espacios vacios -->
