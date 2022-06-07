@@ -4,7 +4,6 @@ form {
 }
 .row {
     display: flex;
-    
     box-sizing: border-box;
 }
 /* .form-group {
@@ -15,12 +14,21 @@ form {
     height: 8rem;
     box-sizing: border-box;
 }
+.row-2 {
+    height: 5rem;
+}
 .row-1 {
     width: 30%;
     height: 8rem;
     box-sizing: border-box;
 }
-.row-pass {
+.hgt-8 {
+    height: 8rem;
+}
+.mg {
+    margin-left: 10%;
+}
+.two-rows {
     width: 30%;
     box-sizing: border-box;
 }
@@ -60,6 +68,9 @@ div label input {
 small {
     color: red;
 }
+#msg {
+    color: #1645f0;
+}
 .radio-button {
     display: flex;
     background-color: aquamarine;
@@ -90,11 +101,21 @@ small {
       width: 50px;
   }
   */
-  .col-pass {
+  .two-cols {
     margin: 0 10%;
     box-sizing: border-box;
   }
   .hide {
       display: none;
   }
-
+.flex {
+    display: flex;
+    align-items: center;
+}
+.w-10 {
+    width: 20px;
+    margin-right: 20px;
+}
+.form-check-input {
+    height: 20px;
+}
