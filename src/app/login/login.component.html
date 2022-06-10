@@ -161,7 +161,7 @@
         <small *ngIf="!password.valid && password.touched" class="mg">La contraseña de debe tener un mínimo de 8 caracteres, al menos una letra minúscula, una letra mayúscula, un número, y un caracter especial</small>
         <small *ngIf="password.valid && contrasenia !== contrasenia2 && password2.touched" class="mg">La contraseñas no coinciden</small> <br>
     </div>
-    <div id="user-comunication" ngModelGroup="userComunication">
+    <div id="user-comunication" ngModelGroup="userAddress">
         <div class="row">
             <div class="form-group col-1 row-1">
                 <label for="provincia">Provincia</label> <br>
@@ -175,9 +175,9 @@
                 (change)="cargarCanton($event)">
                     <option *ngFor="let provincia of provincias">{{ provincia }}</option>
                 </select>
-                <small *ngIf="!provincia.valid && provincia.touched">Debe escoger una provincia</small>
+                <small *ngIf="provincia.value === 'Elija una provincia' && provincia.touched">Debe escoger una provincia</small>
             </div>
-            <div class="form-group col-2 row-1" [ngClass]="{hide: provinciaSelecionada === ''}">
+            <div class="form-group col-2 row-1" [ngClass]="{hide: provinciaSelecionada === 'Elija una provincia'}">
                 <label for="canton">Cantón</label> <br>
                 <select class="form-select"
                 name="canton"
@@ -189,10 +189,10 @@
                 (change)="cargarDistrito($event)">
                     <option *ngFor="let canton of cantones">{{ canton }}</option>
                 </select>
-                <small *ngIf="!canton.valid && canton.touched">Debe escoger un cantón</small>
+                <small *ngIf="canton.value === 'Elija un cantón' && canton.touched">Debe escoger un cantón</small>
             </div>    
-            <div class="form-group col-3 row-1" [ngClass]="{hide: cantonSelecionado === ''}">
-                <label for="distrito">Cantón</label> <br>
+            <div class="form-group col-3 row-1" [ngClass]="{hide: cantonSelecionado === 'Elija un cantón'}">
+                <label for="distrito">Distrito</label> <br>
                 <select class="form-select"
                 name="distrito"
                 required
@@ -202,7 +202,7 @@
                 #distrito="ngModel">
                     <option *ngFor="let distrito of distritos">{{ distrito }}</option>
                 </select>
-                <small *ngIf="!distrito.valid && distrito.touched">Debe escoger un distrito</small>
+                <small *ngIf="distrito.value === 'Elija un distrito' && distrito.touched">Debe escoger un distrito</small>
             </div>
         </div>
         <div class="row-0">
@@ -233,7 +233,7 @@
                 </div>
               </div>
         </div>
-        <div class="row">
+        <!-- <div class="row">
             <div class="form-group radio row-1" >
                 <div class="radio-button" *ngFor="let genero of generos">
                     {{ genero }}
@@ -247,9 +247,8 @@
                     #genero="ngModel"> 
                 </label>
                 </div>
-                <small >test</small> <br>
             </div>
-        </div>
+        </div> -->
     </div>
     <button 
     class="btn btn-primary" 

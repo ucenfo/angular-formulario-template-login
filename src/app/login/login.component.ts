@@ -1,5 +1,7 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, NgForm } from '@angular/forms';
+import { Cliente } from '../modelos/cliente.model';
+import { Direccion } from '../modelos/direccion.model';
 
 
 @Component({
@@ -8,6 +10,8 @@ import { FormGroup, NgForm } from '@angular/forms';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit{
+  cliente: Cliente = new Cliente('','','','','','','',
+  new Direccion('','','',''));
   @ViewChild('f', { static: false }) formulario!: NgForm;
   existeNickName = false;
   existeEmail = false;
@@ -15,12 +19,12 @@ export class LoginComponent implements OnInit{
   emailValid = false;
   codMailValid = false;
   codPhoneValid = false;
-  provincias: string [] = [];
-  cantones: string[] = [];
-  distritos: string [] = [];
-  provinciaSelecionada = "";
-  cantonSelecionado = "";
-  distritoSelecionado = "";
+  provincias: string [] = ['Elija una provincia'];
+  cantones: string[] = ['Elija un cantón'];
+  distritos: string [] = ['Elija un distrito'];
+  provinciaSelecionada = 'Elija una provincia';
+  cantonSelecionado = 'Elija un cantón';
+  distritoSelecionado = 'Elija un distrito';
   contrasenia = '';
   contrasenia2 = '';
   codigotelefono: number = 0;
@@ -70,7 +74,8 @@ export class LoginComponent implements OnInit{
    * Descripción:       Método que permite cargar las provincias de la base de datos.
    */
   cargarProvincias(){
-    this.provincias = ['Cartago', 'San José', 'Heredia', 'Alajuela'];
+    const listProvincias = ['Cartago', 'San José', 'Heredia', 'Alajuela'];
+    this.provincias.push(...listProvincias);
     // TODO: hacer consulta a la base de datos
   }
   /**
@@ -80,11 +85,13 @@ export class LoginComponent implements OnInit{
    */
   cargarCanton(provincia: Event): void {
     const provinciaElegida = (provincia.target as HTMLInputElement).value;
-    this.cantonSelecionado = '';
-    this.distritoSelecionado = '';
-    console.log(provinciaElegida);
-    // TODO: consulta a la BD para traer los cantones de la provincia elegida.
-    this.cantones = ['Oreamuno', 'Paraíso'];
+    if (provinciaElegida !== 'Elija una provincia') {
+      this.distritoSelecionado = 'Elija un distrito';
+      // TODO: consulta a la BD para traer los cantones de la provincia elegida.
+      const listCantones: string[] = ['Oreamuno', 'Paraíso'];
+      this.cantones.push(...listCantones);
+      this.cantonSelecionado = 'Elija un cantón';
+    }
   }
   /**
    * Método:            cargarDistrito
@@ -93,10 +100,13 @@ export class LoginComponent implements OnInit{
    */
   cargarDistrito(canton: Event): void {
     const cantonElegido = (canton.target as HTMLInputElement).value;
-    this.distritoSelecionado = '';
-    console.log(cantonElegido);
+    if (cantonElegido !== 'Elija un cantón') {
+      this.distritoSelecionado = 'Elija un distrito';
     // TODO: consulta a la BD para traer los distritos del cantón seleccionado
-    this.distritos = ['San Rafael', 'Cot'];
+    const listDistritos = ['San Rafael', 'Cot'];
+    this.distritos.push('Elija un distrito');
+    this.distritos.push(...listDistritos);
+    }
   }
   /**
    * Método:            generarCodigoVerificacionCorreo
@@ -104,7 +114,7 @@ export class LoginComponent implements OnInit{
    */
   generarCodigoVerificacionCorreo(): void {
     this.codigoCorreo = 587698;
-    console.log(this.codigoCorreo);
+    console.log(`Código de correo ` + this.codigoCorreo);
     // TODO: solicitud de generar código a la logica, enviarlo al usuario por correo y recibirlo en este método.
   }
   /**
@@ -115,7 +125,7 @@ export class LoginComponent implements OnInit{
     if (isValidPhone){
       this.phoneValid = true;
       this.codigotelefono = 987654
-      console.log(this.codigotelefono);
+      console.log(`código de teléfono ` + this.codigotelefono);
     } else {
       this.phoneValid = false;
     }
@@ -135,7 +145,6 @@ export class LoginComponent implements OnInit{
     const codIngresado = Number((codTelefonoIngresado.target as HTMLInputElement).value);
     if (this.codigotelefono === codIngresado) {
       this.codPhoneValid = true;
-      console.log(this.codMailValid);
     } else {
       this.codPhoneValid = false;
     }
@@ -152,8 +161,20 @@ export class LoginComponent implements OnInit{
    * Descripción:       Método que permite enviar los datos ingresados por el usuario para crear un nuevo perfil
    */
   onSubmit(){
+    // console.log(this.formulario.controls.userAddress.value);
     console.log(this.formulario);
-    const nombre = this.formulario.value.name;
-    console.log(this.formulario.value.notificacion);
+    this.cliente.nombre = this.formulario.controls.userData.value.name;
+    this.cliente.apellido1 = this.formulario.controls.userData.value.apellido1;
+    this.cliente.apellido2 = this.formulario.controls.userData.value.apellido2;
+    this.cliente.nickname = this.formulario.controls.userData.value.nickname;
+    this.cliente.correo = this.formulario.controls.userData.value.email;
+    this.cliente.telefono = this.formulario.controls.userData.value.phone;
+    this.cliente.contrasenia = this.formulario.controls.userData.value.password;
+    this.cliente.direccion.provincia = this.formulario.controls.userAddress.value.provincia;
+    this.cliente.direccion.canton = this.formulario.controls.userAddress.value.canton;
+    this.cliente.direccion.distrito = this.formulario.controls.userAddress.value.distrito;
+    this.cliente.direccion.dirExacta = this.formulario.controls.userAddress.value.address;
+    console.log(this.cliente);
+    // TODO: enviar info a logica de negocio.
   }
 }
